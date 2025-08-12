@@ -1,0 +1,12 @@
+# Django
+venv/
+.env/
+db.sqlite3
+media/
+*.pyc
+__pycache__/
+
+# React
+node_modules/
+build/
+.env.local
