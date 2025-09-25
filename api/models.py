@@ -19,7 +19,18 @@ class Comment(models.Model):
     comment_text = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
 class Support(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     supported_at = models.DateTimeField(auto_now_add=True)
+
+#razorpay not yet implemented becoz of isuues with razorpay api key
+class Donation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='donations')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='donations')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_id = models.CharField(max_length=100, blank=True, null=True)
+    order_id = models.CharField(max_length=100, blank=True, null=True)
+    status = models.CharField(max_length=30, default='created')  # created, paid, failed
+    created_at = models.DateTimeField(auto_now_add=True)

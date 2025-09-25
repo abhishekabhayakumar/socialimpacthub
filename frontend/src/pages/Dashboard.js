@@ -120,93 +120,93 @@ const Dashboard = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={4}>
-        {/* User Profile Section */}
-        <Grid item xs={12}>
-          <Paper elevation={3} sx={{ p: 3 }}>
-            <Box display="flex" alignItems="center" mb={2}>
-              <Avatar sx={{ width: 64, height: 64, mr: 2 }}>
-                {user?.username?.[0]?.toUpperCase()}
-              </Avatar>
-              <Box>
-                <Typography variant="h5">{user?.username}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {user?.email}
-                </Typography>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)', py: 6 }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* User Profile Section */}
+          <Grid item xs={12}>
+            <Paper elevation={6} sx={{ p: 4, borderRadius: 4, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)' }}>
+              <Box display="flex" alignItems="center" mb={2}>
+                <Avatar sx={{ width: 72, height: 72, mr: 3, bgcolor: 'primary.main', fontSize: 36 }}>
+                  {user?.username?.[0]?.toUpperCase()}
+                </Avatar>
+                <Box>
+                  <Typography variant="h4" fontWeight={700} color="primary.dark">{user?.username}</Typography>
+                  <Typography variant="body1" color="text.secondary">
+                    {user?.email}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-            <Divider sx={{ my: 2 }} />
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
-                <Box textAlign="center">
-                  <Typography variant="h4">{stats.totalProjects}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Projects Created
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box textAlign="center">
-                  <Typography variant="h4">{stats.totalSupported}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Projects Supported
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Box textAlign="center">
-                  <Typography variant="h4">{stats.impactReach}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Impact Reach
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-
-        {/* Projects and Activities Section */}
-        <Grid item xs={12}>
-          <Paper elevation={3}>
-            <Tabs
-              value={value}
-              onChange={handleTabChange}
-              variant="fullWidth"
-              indicatorColor="primary"
-              textColor="primary"
-            >
-              <Tab icon={<CreateIcon />} label="MY PROJECTS" />
-              <Tab icon={<SupportIcon />} label="SUPPORTED" />
-              <Tab icon={<StatsIcon />} label="IMPACT" />
-            </Tabs>
-            
-            <TabPanel value={value} index={0}>
-              <List sx={{ width: '100%' }}>
-                {renderProjectList(myProjects)}
-              </List>
-            </TabPanel>
-            
-            <TabPanel value={value} index={1}>
-              <List sx={{ width: '100%' }}>
-                {renderProjectList(supportedProjects)}
-              </List>
-            </TabPanel>
-            
-            <TabPanel value={value} index={2}>
+              <Divider sx={{ my: 3 }} />
               <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Typography variant="h6" gutterBottom>
-                    Your Impact Overview
-                  </Typography>
-                  {/* Add impact visualization components here */}
+                <Grid item xs={12} md={4}>
+                  <Box textAlign="center">
+                    <Typography variant="h3" fontWeight={700} color="primary.main">{stats.totalProjects}</Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Projects Created
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Box textAlign="center">
+                    <Typography variant="h3" fontWeight={700} color="info.main">{stats.totalSupported}</Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Projects Supported
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Box textAlign="center">
+                    <Typography variant="h3" fontWeight={700} color="success.main">{stats.impactReach}</Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Impact Reach
+                    </Typography>
+                  </Box>
                 </Grid>
               </Grid>
-            </TabPanel>
-          </Paper>
+            </Paper>
+          </Grid>
+
+          {/* Projects and Activities Section */}
+          <Grid item xs={12}>
+            <Paper elevation={6} sx={{ borderRadius: 4, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)' }}>
+              <Tabs
+                value={value}
+                onChange={handleTabChange}
+                variant="fullWidth"
+                indicatorColor="primary"
+                textColor="primary"
+                sx={{ borderRadius: 4, background: 'linear-gradient(90deg, #f8fafc 0%, #e0eafc 100%)' }}
+              >
+                <Tab icon={<CreateIcon />} label="MY PROJECTS" />
+                <Tab icon={<SupportIcon />} label="SUPPORTED" />
+                <Tab icon={<StatsIcon />} label="IMPACT" />
+              </Tabs>
+              <TabPanel value={value} index={0}>
+                <List sx={{ width: '100%' }}>
+                  {renderProjectList(myProjects)}
+                </List>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <List sx={{ width: '100%' }}>
+                  {renderProjectList(supportedProjects)}
+                </List>
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6" gutterBottom>
+                      Your Impact Overview
+                    </Typography>
+                    {/* Add impact visualization components here */}
+                  </Grid>
+                </Grid>
+              </TabPanel>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

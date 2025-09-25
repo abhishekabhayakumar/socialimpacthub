@@ -1,3 +1,6 @@
+# Razorpay API keys (replace with your real keys)
+RAZORPAY_KEY_ID = 'rzp_test_yourkeyid'
+RAZORPAY_KEY_SECRET = 'yourkeysecret'
 """
 Django settings for ImpactHub project.
 
@@ -11,6 +14,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env at project root (if present)
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +34,17 @@ SECRET_KEY = 'django-insecure-2mz%z&-=zgn_@d=2&v*@ve^k_m%dq_ymnw_==%a7e2-#4kstl8
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# Gemini / Generative Language configuration
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-2.0-flash')
+# Toggle enforcement of classification. If False (default), projects are allowed even if the classifier
+# marks them as non-impactful. Set to 'true' in .env to enforce.
+GEMINI_ENFORCE_CLASSIFICATION = os.environ.get('GEMINI_ENFORCE_CLASSIFICATION', 'false').lower() == 'true'
+# If True, when the classifier API returns an error or ambiguous result, allow creation (fail-open).
+# If False, ambiguous or errored classification counts as non-impactful and will be rejected when enforcement is on.
+GEMINI_FAIL_OPEN = os.environ.get('GEMINI_FAIL_OPEN', 'true').lower() == 'true'
+GEMINI_USE_FALLBACK = os.environ.get('GEMINI_USE_FALLBACK', 'true').lower() == 'true'
 
 
 # Application definition

@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import CreateProject from './pages/CreateProject';
 import ProjectDetail from './pages/ProjectDetail';
 import Dashboard from './pages/Dashboard';
+import MyDonations from './pages/MyDonations';
 
 const theme = createTheme({
   palette: {
@@ -51,6 +52,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route 
+                path="/my-donations" 
+                element={
+                  <ProtectedRoute>
+                    <MyDonations />
                   </ProtectedRoute>
                 }
               />

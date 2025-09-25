@@ -4,7 +4,7 @@ import {
   Grid, 
   Typography, 
   TextField, 
-
+  Box,
   Select,
   MenuItem,
   FormControl,
@@ -106,82 +106,87 @@ const Projects = () => {
   const sortedProjects = sortProjects(filteredProjects);
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Explore Projects
-      </Typography>
-      <Grid container spacing={2} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={6}>
-          <TextField
-            fullWidth
-            label="Search projects"
-            variant="outlined"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <FormControl fullWidth>
-            <InputLabel>Impact Area</InputLabel>
-            <Select
-              value={impactArea}
-              label="Impact Area"
-              onChange={(e) => setImpactArea(e.target.value)}
-            >
-              {IMPACT_AREAS.map(area => (
-                <MenuItem key={area.value} value={area.value}>
-                  {area.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <FormControl fullWidth>
-            <InputLabel>Sort By</InputLabel>
-            <Select
-              value={sortBy}
-              label="Sort By"
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              {SORT_OPTIONS.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
-      <Grid container spacing={4}>
-        {loading ? (
-          Array(6).fill(0).map((_, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4}>
-              <Skeleton 
-                variant="rectangular" 
-                height={300}
-                sx={{ borderRadius: 2 }}
-              />
-            </Grid>
-          ))
-        ) : sortedProjects.length > 0 ? (
-          sortedProjects.map((project) => (
-            <Grid item key={project.id} xs={12} sm={6} md={4}>
-              <ProjectCard 
-                project={project} 
-                onSupportToggle={handleSupportToggle}
-              />
-            </Grid>
-          ))
-        ) : (
-          <Grid item xs={12}>
-            <Typography variant="h6" align="center" color="text.secondary">
-              No projects found matching your criteria
-            </Typography>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)', py: 6 }}>
+      <Container maxWidth="lg">
+        <Typography variant="h3" fontWeight={700} color="primary.dark" gutterBottom align="center" sx={{ mb: 4, letterSpacing: 1 }}>
+          Explore Projects
+        </Typography>
+        <Grid container spacing={2} sx={{ mb: 4 }}>
+          <Grid item xs={12} md={6}>
+            <TextField
+              fullWidth
+              label="Search projects"
+              variant="outlined"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              sx={{ bgcolor: '#f5f7fa', borderRadius: 2 }}
+            />
           </Grid>
-        )}
-      </Grid>
-    </Container>
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth>
+              <InputLabel>Impact Area</InputLabel>
+              <Select
+                value={impactArea}
+                label="Impact Area"
+                onChange={(e) => setImpactArea(e.target.value)}
+                sx={{ bgcolor: '#f5f7fa', borderRadius: 2 }}
+              >
+                {IMPACT_AREAS.map(area => (
+                  <MenuItem key={area.value} value={area.value}>
+                    {area.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <FormControl fullWidth>
+              <InputLabel>Sort By</InputLabel>
+              <Select
+                value={sortBy}
+                label="Sort By"
+                onChange={(e) => setSortBy(e.target.value)}
+                sx={{ bgcolor: '#f5f7fa', borderRadius: 2 }}
+              >
+                {SORT_OPTIONS.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid container spacing={4}>
+          {loading ? (
+            Array(6).fill(0).map((_, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4}>
+                <Skeleton 
+                  variant="rectangular" 
+                  height={300}
+                  sx={{ borderRadius: 4 }}
+                />
+              </Grid>
+            ))
+          ) : sortedProjects.length > 0 ? (
+            sortedProjects.map((project) => (
+              <Grid item key={project.id} xs={12} sm={6} md={4}>
+                <ProjectCard 
+                  project={project} 
+                  onSupportToggle={handleSupportToggle}
+                />
+              </Grid>
+            ))
+          ) : (
+            <Grid item xs={12}>
+              <Typography variant="h6" align="center" color="text.secondary">
+                No projects found matching your criteria
+              </Typography>
+            </Grid>
+          )}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 

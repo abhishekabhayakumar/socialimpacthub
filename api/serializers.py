@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Project, Comment
+from .models import Project, Comment, Donation
+
+# Donation Serializer
+class DonationSerializer(serializers.ModelSerializer):
+    project_title = serializers.CharField(source='project.title', read_only=True)
+    class Meta:
+        model = Donation
+        fields = ('id', 'amount', 'status', 'created_at', 'project', 'project_title', 'payment_id', 'order_id')
 
 User = get_user_model()
 
